@@ -1,22 +1,22 @@
-import { test } from "@playwright/test";
+import { test } from '@playwright/test';
 import {
   clickConsentToCookiesButton,
   waitForPageToLoad,
-} from "@utils/PageHelpers";
-import { getDateOfBirthFromAge } from "@utils/utils";
-import { navigateToCensusPage } from "@pages/choice-dtc/CensusPage";
+} from '@utils/PageHelpers';
+import { getDateOfBirthFromAge } from '@utils/utils';
+import { navigateToCensusPage } from '@pages/choice-dtc/CensusPage';
 
-import CensusPage from "@pages/choice-dtc/CensusPage";
-import DemographicsPage from "@pages/choice-dtc/DemographicsPage";
+import CensusPage from '@pages/choice-dtc/CensusPage';
+import DemographicsPage from '@pages/choice-dtc/DemographicsPage';
 
-import { ApplicantType, Gender, YesNoAnswer } from "@enums/enums";
-import applicantInfo from "@data/applicant-information.json";
+import { ApplicantType, Gender, YesNoAnswer } from '@enums/enums';
+import applicantInfo from '@data/applicant-information.json';
 
-test("STM - Basic flow 1 @forms @example @smoke", async ({ page }) => {
+test('STM - Basic flow 1 @forms @example @smoke', async ({ page }) => {
   const censusPage = new CensusPage(page);
   const demographicsPage = new DemographicsPage(page);
 
-  const zipCode = "75221";
+  const zipCode = '75221';
   const dateOfBirth = await getDateOfBirthFromAge(applicantInfo.primary.age);
 
   await navigateToCensusPage(page);
@@ -26,7 +26,7 @@ test("STM - Basic flow 1 @forms @example @smoke", async ({ page }) => {
   await censusPage.clickOnSTMCheckBox();
   await censusPage.clickOnLetsGoButton();
 
-  await waitForPageToLoad(page, "Contact Information");
+  await waitForPageToLoad(page, 'Contact Information');
   await demographicsPage.fillDemographicsInfo(ApplicantType.Primary, {
     dob: dateOfBirth,
     gender: Gender.Female,

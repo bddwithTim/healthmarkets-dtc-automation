@@ -12,7 +12,7 @@ env/
 test-results/
 reports/
 screenshots/
-playwright-report/
+playwright-report
 
 # TypeScript build output
 dist/

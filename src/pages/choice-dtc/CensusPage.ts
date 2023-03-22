@@ -1,16 +1,15 @@
 import { Page } from '@playwright/test';
 
 export async function navigateToCensusPage(page: Page): Promise<void> {
-  await page.goto(`${process.env.BASE_URL}${process.env.TOKEN}`);  
+  await page.goto(`${process.env.BASE_URL}${process.env.TOKEN}`);
 }
 
 export default class CensusPage {
   private readonly page: Page;
 
   private censusPageElements = {
-
     // buttons
-    letsGoBtn: 'p:has-text(\'Let\\\'s Go!\')',
+    letsGoBtn: 'p:has-text("Let\'s Go!")',
 
     // checkboxes
     ACACheckBox: 'id=rdo_aca_health insurance',
@@ -33,7 +32,6 @@ export default class CensusPage {
   async clickOnMedicareCheckBox(): Promise<void> {
     await this.page.locator(this.censusPageElements.MedicareCheckBox).click();
   }
-
 
   async clickOnACACheckBox(): Promise<void> {
     await this.page.locator(this.censusPageElements.ACACheckBox).click();
@@ -60,4 +58,3 @@ export default class CensusPage {
     await this.page.locator(`//li[@data-value="${county}"]`).click();
   }
 }
-

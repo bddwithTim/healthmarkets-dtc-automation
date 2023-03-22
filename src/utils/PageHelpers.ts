@@ -15,7 +15,7 @@ export async function waitForPageToLoad(
     page.waitForFunction(
       (title: string) => document.title.includes(title),
       pageTitle,
-      { timeout },
+      { timeout }
     ),
     page.waitForLoadState(loadState, { timeout }),
   ]);
@@ -24,7 +24,6 @@ export async function waitForPageToLoad(
     await waitForUHOSpinnerToDisappear(page);
   }
 }
-
 
 export async function clickConsentToCookiesButton(page: Page): Promise<void> {
   await page.click('button:has-text("I consent to cookies")');
@@ -44,5 +43,5 @@ export async function waitForUHOSpinnerToDisappear(page: Page): Promise<void> {
 }
 
 export async function clickUHOContinueBtn(page: Page): Promise<void> {
-  await page.click('//span[text()=\'Continue >\']');
+  await page.click('//span[text()="Continue >"]');
 }

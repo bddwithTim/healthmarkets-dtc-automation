@@ -1,13 +1,13 @@
 import { Page } from '@playwright/test';
 
 export type Height = {
-  feet: number,
-  inches: number
-}
+  feet: number;
+  inches: number;
+};
 
 export type Weight = {
-  lbs: number
-}
+  lbs: number;
+};
 
 export type PrimaryApplicantInfo = {
   firstName?: string;
@@ -20,17 +20,16 @@ export type PrimaryApplicantInfo = {
   ssn?: number;
 };
 
-
 export default class UHOApplicantInfoPage {
   private readonly page: Page;
 
   private applicantInformationPageElements = {
     // buttons
-    btnContinue: '//span[text()=\'Continue >\']',
+    btnContinue: '//span[text()="Continue >"]',
 
     // radio buttons
-    rdoBtnMale: '//label[@for=\'primary_gender_0\']',
-    rdoBtnFemale: '//label[@for=\'primary_gender_1\']',
+    rdoBtnMale: '//label[@for="primary_gender_0"]',
+    rdoBtnFemale: '//label[@for="primary_gender_1"]',
 
     // input fields
     primaryFirstName: 'id=primary_firstName',
@@ -45,7 +44,6 @@ export default class UHOApplicantInfoPage {
 
     contactInfoAddress1: 'id=contactInfo_addressLine1',
     contactInfoCity: 'id=contactInfo_city',
-
   };
 
   constructor(page: Page) {
@@ -125,23 +123,36 @@ export default class UHOApplicantInfoPage {
     emailAddress,
     phoneNumber,
     ssn,
-    gender
+    gender,
   }: PrimaryApplicantInfo): Promise<void> {
-  
-    firstName && await this.page.fill(this.applicantInformationPageElements.primaryFirstName, firstName);
-    lastName && await this.page.fill(this.applicantInformationPageElements.primaryLastName, lastName);
-  
-    height?.feet && height?.inches && await this.fillPrimaryHeight({ feet: height.feet, inches: height.inches});
-    weight?.lbs && await this.fillPrimaryWeight(weight.lbs);
-  
-    emailAddress && await this.fillPrimaryEmailAddress(emailAddress);
-    phoneNumber && await this.fillPrimaryPhone(phoneNumber);
-    ssn && await this.fillPrimarySSN(ssn);
-  
+    firstName &&
+      (await this.page.fill(
+        this.applicantInformationPageElements.primaryFirstName,
+        firstName
+      ));
+    lastName &&
+      (await this.page.fill(
+        this.applicantInformationPageElements.primaryLastName,
+        lastName
+      ));
+
+    height?.feet &&
+      height?.inches &&
+      (await this.fillPrimaryHeight({
+        feet: height.feet,
+        inches: height.inches,
+      }));
+    weight?.lbs && (await this.fillPrimaryWeight(weight.lbs));
+
+    emailAddress && (await this.fillPrimaryEmailAddress(emailAddress));
+    phoneNumber && (await this.fillPrimaryPhone(phoneNumber));
+    ssn && (await this.fillPrimarySSN(ssn));
+
     gender?.toLowerCase() === 'male'
       ? await this.page.click(this.applicantInformationPageElements.rdoBtnMale)
-      : gender?.toLowerCase() === 'female'
-        && await this.page.click(this.applicantInformationPageElements.rdoBtnFemale);
+      : gender?.toLowerCase() === 'female' &&
+        (await this.page.click(
+          this.applicantInformationPageElements.rdoBtnFemale
+        ));
   }
-  
 }

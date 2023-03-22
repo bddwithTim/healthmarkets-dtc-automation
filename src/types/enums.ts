@@ -1,11 +1,11 @@
 export enum YesNoAnswer {
   Yes = 'Yes',
-  No = 'No'
+  No = 'No',
 }
 
 export enum Gender {
   Male = 'Male',
-  Female = 'Female'
+  Female = 'Female',
 }
 
 export enum ApplicantType {

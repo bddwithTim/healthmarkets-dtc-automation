@@ -1,12 +1,11 @@
 import { Page } from '@playwright/test';
 
 export default class MoreInfoNeededPage {
-
   private readonly page: Page;
 
   private readonly MoreInfoNeededPageElements = {
     // buttons
-    btnContinue: '//span[text()=\'Continue to next step\']',
+    btnContinue: '//span[text()="Continue to next step"]',
 
     // input fields
     contactEmail: 'id=email',
@@ -35,10 +34,10 @@ export default class MoreInfoNeededPage {
   }
 
   async clickContinueBtn(): Promise<void | Page> {
-    // There is an issue (low priority) in supp environment wherein 
+    // There is an issue (low priority) in supp environment wherein
     // it will open a new tab for UHO Applicant information page
     // instead of just staying on the same page session
-    if(process.env.test_env === 'supp'){
+    if (process.env.test_env === 'supp') {
       const [newTab] = await Promise.all([
         this.page.waitForEvent('popup'),
         this.page.click(this.MoreInfoNeededPageElements.btnContinue),
@@ -49,7 +48,7 @@ export default class MoreInfoNeededPage {
     // playwright has an auto-wait feature for click events
     // but for some reason, it doesn't work on this particular button
     // so we have to add a manual wait
-    await this.page.waitForTimeout(1000); 
+    await this.page.waitForTimeout(1000);
     await this.page.click(this.MoreInfoNeededPageElements.btnContinue);
   }
 }

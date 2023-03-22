@@ -1,6 +1,8 @@
 import { Page } from '@playwright/test';
-import { hasUHOSpinner, waitForUHOSpinnerToDisappear } from '@utils/PageHelpers';
-
+import {
+  hasUHOSpinner,
+  waitForUHOSpinnerToDisappear,
+} from '@utils/PageHelpers';
 
 export default class UHOPaymentAndBillingPage {
   private readonly page: Page;
@@ -23,8 +25,10 @@ export default class UHOPaymentAndBillingPage {
     this.page = page;
   }
 
-  async waitForSummaryWizard(): Promise<void> { 
-    await this.page.waitForSelector(this.paymentAndBillingPageElements.summaryHeader);
+  async waitForSummaryWizard(): Promise<void> {
+    await this.page.waitForSelector(
+      this.paymentAndBillingPageElements.summaryHeader
+    );
 
     if (await hasUHOSpinner(this.page)) {
       await waitForUHOSpinnerToDisappear(this.page);
@@ -32,7 +36,9 @@ export default class UHOPaymentAndBillingPage {
   }
 
   async waitForPaymentWizard(): Promise<void> {
-    await this.page.waitForSelector(this.paymentAndBillingPageElements.paymentHeader);
+    await this.page.waitForSelector(
+      this.paymentAndBillingPageElements.paymentHeader
+    );
 
     if (await hasUHOSpinner(this.page)) {
       await waitForUHOSpinnerToDisappear(this.page);
@@ -40,7 +46,10 @@ export default class UHOPaymentAndBillingPage {
   }
 
   async fillRoutingNumber(routingNumber: string): Promise<void> {
-    await this.page.fill(this.paymentAndBillingPageElements.routingNumber, routingNumber);
+    await this.page.fill(
+      this.paymentAndBillingPageElements.routingNumber,
+      routingNumber
+    );
 
     if (await hasUHOSpinner(this.page)) {
       await waitForUHOSpinnerToDisappear(this.page);
@@ -48,7 +57,10 @@ export default class UHOPaymentAndBillingPage {
   }
 
   async fillAccountNumber(accountNumber: string): Promise<void> {
-    await this.page.fill(this.paymentAndBillingPageElements.accountNumber, accountNumber);
+    await this.page.fill(
+      this.paymentAndBillingPageElements.accountNumber,
+      accountNumber
+    );
   }
 
   async selectCheckingAccount(): Promise<void> {
@@ -58,5 +70,4 @@ export default class UHOPaymentAndBillingPage {
   async selectSavingsAccount(): Promise<void> {
     await this.page.click(this.paymentAndBillingPageElements.savingsAccount);
   }
-
 }

@@ -1,6 +1,5 @@
 import { Page } from '@playwright/test';
 
-
 export default class UHOReviewAndSubmitPagePage {
   private readonly page: Page;
 
@@ -11,7 +10,7 @@ export default class UHOReviewAndSubmitPagePage {
     clickHereToSign: 'text=Click Here to Sign',
 
     // buttons
-    btnSubmitYourApplication: '(//span[text()=\'Submit Your Application\'])[1]', 
+    btnSubmitYourApplication: '(//span[text()="Submit Your Application"])[1]',
   };
 
   constructor(page: Page) {
@@ -24,7 +23,9 @@ export default class UHOReviewAndSubmitPagePage {
     Basic Membership level ($10 a month). This membership gives access to apply 
     for this insurance product.
     */
-    await this.page.click(this.reviewAndSubmitPageElements.firstAcknowledgementCheckbox);
+    await this.page.click(
+      this.reviewAndSubmitPageElements.firstAcknowledgementCheckbox
+    );
   }
 
   async clickSecondAcknowledgementCheckbox(): Promise<void> {
@@ -32,7 +33,9 @@ export default class UHOReviewAndSubmitPagePage {
     I (we) have reviewed, understand, and agree that by applying for coverage and 
     by providing my (our) electronic signature below, I (we) am (are) agreeing to: ...
     */
-    await this.page.click(this.reviewAndSubmitPageElements.secondAcknowledgementCheckbox);
+    await this.page.click(
+      this.reviewAndSubmitPageElements.secondAcknowledgementCheckbox
+    );
   }
 
   async clickHereToSign(): Promise<void> {
@@ -40,7 +43,8 @@ export default class UHOReviewAndSubmitPagePage {
   }
 
   async clickSubmitYourApplication(): Promise<void> {
-    await this.page.click(this.reviewAndSubmitPageElements.btnSubmitYourApplication);
+    await this.page.click(
+      this.reviewAndSubmitPageElements.btnSubmitYourApplication
+    );
   }
-
 }

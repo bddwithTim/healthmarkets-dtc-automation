@@ -9,12 +9,12 @@
     "test:supp": "cross-env test_env=supp npx playwright test",
     "test:prod": "cross-env test_env=prod npx playwright test -g \"@prod\"",
     "lint": "eslint . --ext .ts",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write . --single-quote"
   },
   "lint-staged": {
     "*.{ts,js}": [
       "eslint --fix",
-      "prettier --write",
+      "prettier --write --single-quote",
       "git add"
     ]
   },

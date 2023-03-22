@@ -2,7 +2,6 @@ import { Page } from '@playwright/test';
 import { YesNoAnswer, Gender, ApplicantType } from '@enums/enums';
 import { isValidDateOfBirthFormat } from '@utils/utils';
 
-
 interface DemographicsInfo {
   firstName?: string;
   lastName?: string;
@@ -16,9 +15,7 @@ interface DemographicsInfo {
   phoneNumber?: string;
 }
 
-
 export default class DemographicsPage {
-
   private readonly page: Page;
 
   private demographicsPageElements = {
@@ -36,22 +33,25 @@ export default class DemographicsPage {
     // select fields
     genderSelection: {
       female: 'li[data-value=Female]',
-      male: 'li[data-value=Male]'
+      male: 'li[data-value=Male]',
     },
     isParent: {
       noOption: 'id=parent1',
       yesOption: 'id=parent0',
     },
 
-    // modals    
-    goodNewsModal: '//div[@role=\'dialog\']',
+    // modals
+    goodNewsModal: '//div[@role="dialog"]',
 
     // primary applicant section
     primary: {
-      firstName: 'div[aria-label="Primary Applicant "] label:has-text("First Name")',
-      lastName: 'div[aria-label="Primary Applicant "] label:has-text("Last Name")',
+      firstName:
+        'div[aria-label="Primary Applicant "] label:has-text("First Name")',
+      lastName:
+        'div[aria-label="Primary Applicant "] label:has-text("Last Name")',
       dob: 'div[aria-label="Primary Applicant "] label:has-text("Date of Birth*")',
-      genderDropdown: 'div[aria-label="Primary Applicant "] div[aria-label="Sex*"]',
+      genderDropdown:
+        'div[aria-label="Primary Applicant "] div[aria-label="Sex*"]',
       isTobaccoUser: {
         noOption: '(//input[@id="tobacco1"])[1]',
         yesOption: '(//input[@id="tobacco0"])[1]',
@@ -77,7 +77,6 @@ export default class DemographicsPage {
       dob: 'div[aria-label="Dependent "] label:has-text("Date of Birth")',
       genderDropdown: 'div[aria-label="Dependent "] div[aria-label="Sex*"]',
     },
-
   };
 
   constructor(page: Page) {
@@ -95,7 +94,10 @@ export default class DemographicsPage {
     await this.page.fill(this.demographicsPageElements.email, email);
   }
 
-  async fillFirstNameField(firstName: string, applicant: ApplicantType = ApplicantType.Primary): Promise<void> {
+  async fillFirstNameField(
+    firstName: string,
+    applicant: ApplicantType = ApplicantType.Primary
+  ): Promise<void> {
     let field;
     switch (applicant) {
       case ApplicantType.Primary:
@@ -113,7 +115,10 @@ export default class DemographicsPage {
     await this.page.fill(field, firstName);
   }
 
-  async fillLastNameField(lastName: string, applicant: ApplicantType = ApplicantType.Primary): Promise<void> {
+  async fillLastNameField(
+    lastName: string,
+    applicant: ApplicantType = ApplicantType.Primary
+  ): Promise<void> {
     let field;
     switch (applicant) {
       case ApplicantType.Primary:
@@ -131,10 +136,15 @@ export default class DemographicsPage {
     await this.page.fill(field, lastName);
   }
 
-  async fillDateOfBirthField(dob: string, applicant: ApplicantType = ApplicantType.Primary): Promise<void> {
+  async fillDateOfBirthField(
+    dob: string,
+    applicant: ApplicantType = ApplicantType.Primary
+  ): Promise<void> {
     const isValid = isValidDateOfBirthFormat(dob);
     if (!isValid) {
-      throw new Error('Incorrect date format. Please fill date in the format \'MM/DD/YYYY\'.');
+      throw new Error(
+        'Incorrect date format. Please fill date in the format "MM/DD/YYYY".'
+      );
     }
 
     let field;
@@ -161,45 +171,57 @@ export default class DemographicsPage {
     );
   }
 
-  async selectGender(gender: Gender, applicant: ApplicantType = ApplicantType.Primary): Promise<void> {
+  async selectGender(
+    gender: Gender,
+    applicant: ApplicantType = ApplicantType.Primary
+  ): Promise<void> {
     let genderOption;
     switch (applicant) {
       case ApplicantType.Primary:
-        genderOption = gender === Gender.Female
-          ? this.demographicsPageElements.genderSelection.female
-          : this.demographicsPageElements.genderSelection.male;
+        genderOption =
+          gender === Gender.Female
+            ? this.demographicsPageElements.genderSelection.female
+            : this.demographicsPageElements.genderSelection.male;
         break;
       case ApplicantType.Spouse:
-        genderOption = gender === Gender.Female
-          ? this.demographicsPageElements.genderSelection.female
-          : this.demographicsPageElements.genderSelection.male;
+        genderOption =
+          gender === Gender.Female
+            ? this.demographicsPageElements.genderSelection.female
+            : this.demographicsPageElements.genderSelection.male;
         break;
       case ApplicantType.Dependent1:
-        genderOption = gender === Gender.Female
-          ? this.demographicsPageElements.genderSelection.female
-          : this.demographicsPageElements.genderSelection.male;
+        genderOption =
+          gender === Gender.Female
+            ? this.demographicsPageElements.genderSelection.female
+            : this.demographicsPageElements.genderSelection.male;
         break;
       default:
         throw new Error(`Invalid applicant type: ${applicant}`);
     }
 
-    await this.page.locator(this.demographicsPageElements[applicant].genderDropdown).click();
+    await this.page
+      .locator(this.demographicsPageElements[applicant].genderDropdown)
+      .click();
     await this.page.locator(genderOption).click();
   }
 
-
-  async selectTobaccoUsageAnswer(answer: YesNoAnswer, applicant: ApplicantType = ApplicantType.Primary): Promise<void> {
+  async selectTobaccoUsageAnswer(
+    answer: YesNoAnswer,
+    applicant: ApplicantType = ApplicantType.Primary
+  ): Promise<void> {
     let tobaccoOption;
     switch (applicant) {
       case ApplicantType.Primary:
-        tobaccoOption = answer === YesNoAnswer.Yes
-          ? this.demographicsPageElements.primary.isTobaccoUser.yesOption
-          : this.demographicsPageElements.primary.isTobaccoUser.noOption;
+        tobaccoOption =
+          answer === YesNoAnswer.Yes
+            ? this.demographicsPageElements.primary.isTobaccoUser.yesOption
+            : this.demographicsPageElements.primary.isTobaccoUser.noOption;
         break;
       case ApplicantType.Spouse:
-        tobaccoOption = answer === YesNoAnswer.Yes
-          ? this.demographicsPageElements.spouse.isTobaccoUser.yesOption
-          : this.demographicsPageElements.spouse.isTobaccoUser.noOption;
+        tobaccoOption =
+          answer === YesNoAnswer.Yes
+            ? this.demographicsPageElements.spouse.isTobaccoUser.yesOption
+            : this.demographicsPageElements.spouse.isTobaccoUser.noOption;
         break;
       default:
         throw new Error(`Invalid applicant type: ${applicant}`);
@@ -207,16 +229,16 @@ export default class DemographicsPage {
 
     await this.page.click(tobaccoOption);
   }
-  
 
   async setParentStatus(status: YesNoAnswer): Promise<void> {
-    const selector = status === YesNoAnswer.Yes
-      ? this.demographicsPageElements.isParent.yesOption
-      : this.demographicsPageElements.isParent.noOption;
-    
+    const selector =
+      status === YesNoAnswer.Yes
+        ? this.demographicsPageElements.isParent.yesOption
+        : this.demographicsPageElements.isParent.noOption;
+
     await this.page.click(selector);
   }
-  
+
   async clickAddSpouseBtn(): Promise<void> {
     await this.page.click(this.demographicsPageElements.addSpouseBtn);
   }
@@ -224,7 +246,7 @@ export default class DemographicsPage {
   async clickAddDependentBtn(): Promise<void> {
     await this.page.click(this.demographicsPageElements.addDependentBtn);
   }
-  
+
   async clickSeeQuotesBtn(): Promise<void> {
     await this.page.click(this.demographicsPageElements.seeQuotesBtn);
   }
@@ -242,19 +264,31 @@ export default class DemographicsPage {
     );
   }
 
-  async fillDemographicsInfo(applicant: ApplicantType = ApplicantType.Primary, {firstName, lastName, dob, gender, annualIncome, 
-    isParent, isTobaccoUser, householdMembers, email, phoneNumber}: DemographicsInfo): Promise<void> {
-
-      firstName && await this.fillFirstNameField(firstName, applicant);
-      lastName && await this.fillLastNameField(lastName, applicant);
-      dob && await this.fillDateOfBirthField(dob, applicant);
-      gender && await this.selectGender(gender, applicant);
-      annualIncome && await this.fillAnnualIncome(annualIncome);
-      isParent && await this.setParentStatus(isParent);
-      isTobaccoUser && await this.selectTobaccoUsageAnswer(isTobaccoUser, applicant);
-      householdMembers && await this.fillHouseholdMembers(householdMembers);
-      email && await this.fillEmailField(email);
-      phoneNumber && await this.fillPhoneNumberField(phoneNumber);
+  async fillDemographicsInfo(
+    applicant: ApplicantType = ApplicantType.Primary,
+    {
+      firstName,
+      lastName,
+      dob,
+      gender,
+      annualIncome,
+      isParent,
+      isTobaccoUser,
+      householdMembers,
+      email,
+      phoneNumber,
+    }: DemographicsInfo
+  ): Promise<void> {
+    firstName && (await this.fillFirstNameField(firstName, applicant));
+    lastName && (await this.fillLastNameField(lastName, applicant));
+    dob && (await this.fillDateOfBirthField(dob, applicant));
+    gender && (await this.selectGender(gender, applicant));
+    annualIncome && (await this.fillAnnualIncome(annualIncome));
+    isParent && (await this.setParentStatus(isParent));
+    isTobaccoUser &&
+      (await this.selectTobaccoUsageAnswer(isTobaccoUser, applicant));
+    householdMembers && (await this.fillHouseholdMembers(householdMembers));
+    email && (await this.fillEmailField(email));
+    phoneNumber && (await this.fillPhoneNumberField(phoneNumber));
   }
-
 }

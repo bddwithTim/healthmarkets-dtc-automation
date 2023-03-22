@@ -4,10 +4,10 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   root: true,
-  'rules': {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': 'error',
-      semi: ['error', 'always'],
-      quotes: ['error', 'single'], 
-    },
+  rules: {
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'error',
+    semi: ['error', 'always'],
+    quotes: ['error', 'single'],
+  },
 };

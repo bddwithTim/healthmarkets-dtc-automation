@@ -7,15 +7,15 @@ export default class QuotesPage {
 
   private quotesPageElements = {
     // buttons
-    btnContinueOnline: 'role=button[name=\'Continue Online\']',
-    btnFirstAddToCart: '(//span[text()=\'Add To Cart\'])[1]',
+    btnContinueOnline: 'role=button[name="Continue Online"]',
+    btnFirstAddToCart: '(//span[text()="Add To Cart"])[1]',
     btnGoToMyCart: 'Go to My Cart',
-    btnLoadMorePlans: '//button[contains(@id, \'show-more-plans\')]',
+    btnLoadMorePlans: '//button[contains(@id, "show-more-plans")]',
     btnProceedToApplication: 'Proceed To Application',
-    
+
     // labels
     paginationLabel:
-      '//p[contains(text(), \'You are viewing\') and contains(text(), \'plans.\')]',
+      '//p[contains(text(), "You are viewing") and contains(text(), "plans.")]',
 
     // links
     clearAllFilters: 'text=Clear All Filters',
@@ -26,7 +26,9 @@ export default class QuotesPage {
   }
 
   async clickGoToMyCartBtn(): Promise<void> {
-    await this.page.getByRole('button', { name: `${this.quotesPageElements.btnGoToMyCart}` }).click();
+    await this.page
+      .getByRole('button', { name: `${this.quotesPageElements.btnGoToMyCart}` })
+      .click();
   }
 
   async clickContinueOnlineBtn(): Promise<void> {
@@ -38,17 +40,20 @@ export default class QuotesPage {
   }
 
   async clickProceedToApplicationBtn(): Promise<void> {
-    await this.page.getByRole('button', { name: `${this.quotesPageElements.btnProceedToApplication}` }).click();
+    await this.page
+      .getByRole('button', {
+        name: `${this.quotesPageElements.btnProceedToApplication}`,
+      })
+      .click();
   }
-
 
   async isAppBarTabDisplayed(tabName: string): Promise<boolean> {
     const activeTabTitle = await this.page.$eval(
-      '.app-bar-tab.active .app-bar-tab-title', 
-      element => element?.textContent?.trim());
+      '.app-bar-tab.active .app-bar-tab-title',
+      (element) => element?.textContent?.trim()
+    );
     return activeTabTitle === tabName;
   }
-
 
   async loadMorePlans(): Promise<void> {
     while (!(await this._checkIfNumPlansDisplayedEqualTotalPlans())) {
@@ -68,29 +73,31 @@ export default class QuotesPage {
     return paginationLabelArray[0] === paginationLabelArray[1];
   }
 
-
   async filterByCompany(companyName: string, timeout = 10000): Promise<void> {
     const companyNameCheckbox = `h6:text("${companyName}")`;
     await this.page.waitForSelector(companyNameCheckbox, { timeout });
     await this.page.click(companyNameCheckbox);
 
-    const isDisplayed = await this.isCompanyDisplayedInTheFilter(companyName, timeout);
+    const isDisplayed = await this.isCompanyDisplayedInTheFilter(
+      companyName,
+      timeout
+    );
 
     if (!isDisplayed) {
       throw new Error(`Company ${companyName} is not displayed in the filter`);
     }
   }
 
-  async isCompanyDisplayedInTheFilter(companyName: string, timeout = 10000): Promise<boolean> {
+  async isCompanyDisplayedInTheFilter(
+    companyName: string,
+    timeout = 10000
+  ): Promise<boolean> {
     const filteredCompanyName = `p:text("Company : ${companyName}")`;
     await this.page.waitForSelector(filteredCompanyName, { timeout });
     return await this.page.isVisible(filteredCompanyName);
   }
 
-  
-
   async clearAllFilters(): Promise<void> {
     await this.page.click(this.quotesPageElements.clearAllFilters);
   }
-
 }

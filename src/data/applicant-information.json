@@ -1,0 +1,26 @@
+{
+  "primary": {
+    "firstName": "primary",
+    "lastName": "automation",
+    "age": 45,
+    "gender": "Male",
+    "phoneNumber": "555-555-5555",
+    "emailAddress": "primary@automation.com"
+  },
+  "spouse": {
+    "firstName": "spouse",
+    "lastName": "automation",
+    "age": 44,
+    "gender": "Female",
+    "phoneNumber": "555-555-5556",
+    "emailAddress": "spouse@automation.com"
+  },
+  "dependent1": {
+    "firstName": "child1",
+    "lastName": "automation",
+    "age": 22,
+    "gender": "Female",
+    "phoneNumber": "555-555-5557",
+    "emailAddress": "child1@automation.com"
+  }
+}

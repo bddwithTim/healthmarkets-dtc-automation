@@ -1,0 +1,11 @@
+{
+  "electronicFundsTransfer": {
+    "routingNumber": "122105155",
+    "accountNumber": "12312341241242141"
+  },
+  "creditCard": {
+    "nameOnCard": "Test Automation",
+    "cardNumber": "1243214214124214214",
+    "expirationDate": "12/25"
+  }
+}

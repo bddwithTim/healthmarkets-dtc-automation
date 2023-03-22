@@ -9,7 +9,9 @@
     "test:supp": "cross-env test_env=supp npx playwright test",
     "test:prod": "cross-env test_env=prod npx playwright test -g \"@prod\"",
     "lint": "eslint . --ext .ts",
-    "prettier": "prettier --write . --single-quote"
+    "pre-commit": "lint-staged",
+    "prettier": "prettier --write . --single-quote",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{ts,js}": [
@@ -32,7 +34,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "eslint": "^8.32.0",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.3",
     "typescript": "^4.9.4"

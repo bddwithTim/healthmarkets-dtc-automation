@@ -76,7 +76,6 @@ For more CLI tests, refer to [Playwright CLI tests](https://playwright.dev/docs/
 - [Commit and Push Workflow Guide](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Commit%20and%20Push%20Workflow%20Guide.md)
 - [Playwright Test Script Authoring](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Playwright%20Test%20Script%20Authoring.md)
 
-
 ## Automation Constraints
 
 This automation repository currently supports functional testing for web applications on desktop browsers. Please note that mobile automation is not supported at this time.

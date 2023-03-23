@@ -2,7 +2,7 @@ import { Page } from '@playwright/test';
 import {
   hasUHOSpinner,
   waitForUHOSpinnerToDisappear,
-} from '@utils/PageHelpers';
+} from '@utils/pageHelpers';
 
 export default class UHOPaymentAndBillingPage {
   private readonly page: Page;

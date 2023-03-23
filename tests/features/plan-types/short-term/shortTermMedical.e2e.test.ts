@@ -4,7 +4,7 @@ import {
   clickConsentToCookiesButton,
   clickUHOContinueBtn,
   waitForPageToLoad,
-} from '@utils/PageHelpers';
+} from '@utils/pageHelpers';
 import { getDateOfBirthFromAge, parseGender } from '@utils/utils';
 import { navigateToCensusPage } from '@pages/choice-dtc/CensusPage';
 
@@ -21,7 +21,7 @@ import { ApplicantType, LoadState, YesNoAnswer } from '@enums/enums';
 import applicantInfo from '@data/applicant-information.json';
 import payment from '@data/payment.json';
 
-test.describe('STM - Basic flow @smokes @e2e @STM', () => {
+test.describe('STM - Basic flow @smoke @e2e @stm', () => {
   test('Quoting a single UHO STM plan, add it to cart and finish the enrollment process', async ({
     page,
   }) => {

@@ -7,7 +7,7 @@ This repository contains the functional test suite for our web application using
 1. [Overview](#overview)
 2. [Getting Started](#getting-started)
 3. [Running Tests](#running-tests)
-4. [Documentation](#documentation)
+4. [Workflow Guides](#workflow-guides)
 5. [Automation Constraints](#automation-constraints)
 
 ## Overview
@@ -71,7 +71,7 @@ npm test -- -g @smoke -g @forms
 
 For more CLI tests, refer to [Playwright CLI tests](https://playwright.dev/docs/test-cli)
 
-## Documentation
+## Workflow Guides
 
 Check the `docs/` folder for guides and documentations which contains:
 

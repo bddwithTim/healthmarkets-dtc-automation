@@ -73,13 +73,9 @@ For more CLI tests, refer to [Playwright CLI tests](https://playwright.dev/docs/
 
 ## Workflow Guides
 
-Check the `docs/` folder for guides and documentations which contains:
+- [Commit and Push Workflow Guide](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Commit%20and%20Push%20Workflow%20Guide.md)
+- [Playwright Test Script Authoring](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Playwright%20Test%20Script%20Authoring.md)
 
-- Workflow guides - "Commit and Push Workflow Guide" document
-- Test script authoring instructions - "Playwright Test Script Authoring" document
-- Test tag categories and descriptions - "Test Tags Categories and Descriptions" document
-
-Please refer to the files in the `docs/` folder for an overview of the available documentation.
 
 ## Automation Constraints
 

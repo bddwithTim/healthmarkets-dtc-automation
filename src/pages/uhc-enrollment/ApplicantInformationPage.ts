@@ -50,7 +50,7 @@ export default class UHOApplicantInfoPage {
     this.page = page;
   }
 
-  async clickOnContinueBtn(): Promise<void> {
+  async clickContinueBtn(): Promise<void> {
     await this.page.click(this.applicantInformationPageElements.btnContinue);
   }
 

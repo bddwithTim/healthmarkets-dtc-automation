@@ -19,6 +19,10 @@ export default class QuotesPage {
 
     // links
     clearAllFilters: 'text=Clear All Filters',
+
+    // Good News Modal section
+    goodNewsModal: 'div.plansfound-good-news',
+    noShowMeQuotesBtn: 'span:has-text("No, Show Me Quotes")',
   };
 
   async clickFirstAddToCartButton(): Promise<void> {
@@ -53,6 +57,26 @@ export default class QuotesPage {
       (element) => element?.textContent?.trim()
     );
     return activeTabTitle === tabName;
+  }
+
+  async waitForGoodNewsModalToBeDisplayed({
+    timeout = 60000,
+  }: { timeout?: number } = {}): Promise<void> {
+    await this.page.waitForSelector(this.quotesPageElements.goodNewsModal, {
+      timeout: timeout,
+      state: 'visible',
+    });
+  }
+
+  async isModalDisplayed(): Promise<boolean> {
+    return await this.page.isVisible(this.quotesPageElements.goodNewsModal);
+  }
+
+  async clickNoShowMeQuotesBtn(): Promise<void> {
+    const modal = await this.isModalDisplayed();
+    if (modal) {
+      await this.page.click(this.quotesPageElements.noShowMeQuotesBtn);
+    }
   }
 
   async loadMorePlans(): Promise<void> {

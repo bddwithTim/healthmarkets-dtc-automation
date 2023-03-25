@@ -76,7 +76,7 @@ export default class UHOShortTermMedicalQuestionsPage {
     this.page = page;
   }
 
-  async clickOnContinueBtn(): Promise<void> {
+  async clickContinueBtn(): Promise<void> {
     await this.page.click(
       this.shortTermMedicalQuestionsPageElements.ContinueButton
     );

@@ -39,6 +39,11 @@ export default class UHOReviewAndSubmitPagePage {
   }
 
   async clickHereToSign(): Promise<void> {
+    // additional pre-caution to prevent successful enrollment in production environment
+    if (process.env.test_env === 'prod') {
+      console.log('Not allowed in production environment!');
+      return;
+    }
     await this.page.click(this.reviewAndSubmitPageElements.clickHereToSign);
   }
 

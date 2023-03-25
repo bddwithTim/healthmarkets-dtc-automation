@@ -6,8 +6,8 @@ This repository contains the functional test suite for our web application using
 
 1. [Overview](#overview)
 2. [Getting Started](#getting-started)
-3. [Running Tests](#running-tests)
-4. [Workflow Guides](#workflow-guides)
+3. [Workflow Guides](#workflow-guides)
+4. [Running Tests](#running-tests)
 5. [Automation Constraints](#automation-constraints)
 
 ## Overview
@@ -22,6 +22,7 @@ Before proceeding with the setup, ensure that the following software is installe
 
 - [Node.js](https://optum.service-now.com/euts_intake?id=appstore&q=Node.js) (version 16.14.2)
 - [Visual Studio Code](https://optum.service-now.com/euts_intake?id=appstore&q=visual%20studio%20code) (version 1.68.1)
+- [Git](https://optum.service-now.com/euts_intake?id=appstore&q=git). Once installed, see [Getting Started with Git: Secure Remote Repository Access Guide](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Secure%20Remote%20Repository%20Access%20Guide.md).
 
 ### Virtual environment setup
 
@@ -30,6 +31,12 @@ To install the project dependencies, follow these steps:
 1. Clone this repository to your local machine.
 2. Open a terminal and navigate to the cloned repository directory.
 3. Run `npm install` to install the required Node.js modules. Wait until the all dependencies have been installed.
+
+## Workflow Guides
+
+- [Getting Started with Git: Secure Remote Repository Access Guide](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Secure%20Remote%20Repository%20Access%20Guide.md)
+- [Playwright Test Script Authoring](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Playwright%20Test%20Script%20Authoring.md)
+- [Commit and Push Workflow Guide](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Commit%20and%20Push%20Workflow%20Guide.md)
 
 ## Running Tests
 
@@ -71,14 +78,9 @@ npm test -- -g @smoke -g @forms
 
 For more CLI tests, refer to [Playwright CLI tests](https://playwright.dev/docs/test-cli)
 
-## Workflow Guides
-
-- [Commit and Push Workflow Guide](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Commit%20and%20Push%20Workflow%20Guide.md)
-- [Playwright Test Script Authoring](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Playwright%20Test%20Script%20Authoring.md)
-
 ## Automation Constraints
 
-This automation repository currently supports functional testing for web applications on desktop browsers. Please note that mobile automation is not supported at this time.
+This automation repository currently only supports functional testing for web applications on desktop browsers. Please note that mobile automation is not supported at this time.
 
 Due to Optum restrictions, testing on Chromium and WebKit browsers is not supported. The test suite is limited to running on the supported browsers as per the organization's policy.
 

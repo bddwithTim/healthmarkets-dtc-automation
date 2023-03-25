@@ -123,3 +123,5 @@ Example:
 
 Following these guidelines will help create well-organized,
 maintainable, and consistent Playwright test scripts.
+
+Once you have finalized your changes, you can now start working on committing and pushing your changes. See [Commit and Push Workflow Guide](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Commit%20and%20Push%20Workflow%20Guide.md).

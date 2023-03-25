@@ -9,12 +9,15 @@ export default class CensusPage {
 
   private censusPageElements = {
     // buttons
-    letsGoBtn: 'p:has-text("Let\'s Go!")',
+    letsGoBtn: 'button[id*=submit-button]',
 
     // checkboxes
     ACACheckBox: 'id=rdo_aca_health insurance',
-    MedicareCheckBox: 'id=rdo_medicare_insurance',
+    dentalCheckBox: 'id=rdo_dental_insurance',
+    medicareCheckBox: 'id=rdo_medicare_insurance',
     STMCheckBox: 'id=rdo_short_term health insurance',
+    supplementalCheckBox: 'id=rdo_supplemental_insurance',
+    visionCheckBox: 'id=rdo_vision_insurance',
 
     // input fields
     county: 'id=county',
@@ -29,19 +32,33 @@ export default class CensusPage {
     await this.page.fill(this.censusPageElements.zipCode, zipCode);
   }
 
-  async clickOnMedicareCheckBox(): Promise<void> {
-    await this.page.locator(this.censusPageElements.MedicareCheckBox).click();
+  async clickMedicareCheckBox(): Promise<void> {
+    await this.page.locator(this.censusPageElements.medicareCheckBox).click();
   }
 
-  async clickOnACACheckBox(): Promise<void> {
+  async clickACACheckBox(): Promise<void> {
     await this.page.locator(this.censusPageElements.ACACheckBox).click();
   }
 
-  async clickOnSTMCheckBox(): Promise<void> {
+  async clickSTMCheckBox(): Promise<void> {
     await this.page.locator(this.censusPageElements.STMCheckBox).click();
   }
 
-  async clickOnLetsGoButton(): Promise<void> {
+  async clickDentalCheckBox(): Promise<void> {
+    await this.page.locator(this.censusPageElements.dentalCheckBox).click();
+  }
+
+  async clickVisionCheckBox(): Promise<void> {
+    await this.page.locator(this.censusPageElements.visionCheckBox).click();
+  }
+
+  async clickSupplementalCheckBox(): Promise<void> {
+    await this.page
+      .locator(this.censusPageElements.supplementalCheckBox)
+      .click();
+  }
+
+  async clickLetsGoButton(): Promise<void> {
     // playwright has an auto-wait feature for click events
     // but for some reason, it doesn't work on this particular button
     // so we have to add a manual wait
@@ -49,7 +66,7 @@ export default class CensusPage {
     await this.page.click(this.censusPageElements.letsGoBtn);
   }
 
-  async clickOnCountySelection(): Promise<void> {
+  async clickCountySelection(): Promise<void> {
     await this.page.waitForSelector(this.censusPageElements.county);
     await this.page.locator(this.censusPageElements.county).click();
   }

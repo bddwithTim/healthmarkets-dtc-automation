@@ -22,6 +22,7 @@ import applicantInfo from '@data/applicant-information.json';
 import payment from '@data/payment.json';
 
 test.describe('STM - Basic flow @smoke @e2e @stm', () => {
+  test.slow();
   test('Quoting a single UHO STM plan, add it to cart and finish the enrollment process', async ({
     page,
   }) => {
@@ -41,8 +42,8 @@ test.describe('STM - Basic flow @smoke @e2e @stm', () => {
 
     // Fill census details
     await censusPage.fillZipCodeField(zipCode);
-    await censusPage.clickOnSTMCheckBox();
-    await censusPage.clickOnLetsGoButton();
+    await censusPage.clickSTMCheckBox();
+    await censusPage.clickLetsGoButton();
 
     // Fill demographics details
     await waitForPageToLoad(page, 'Contact Information');
@@ -93,7 +94,7 @@ test.describe('STM - Basic flow @smoke @e2e @stm', () => {
     });
     await uhoApplicantInfoPage.fillResidentPhysicalAddress('general delivery');
     await uhoApplicantInfoPage.fillResidentCity('Dallas');
-    await uhoApplicantInfoPage.clickOnContinueBtn();
+    await uhoApplicantInfoPage.clickContinueBtn();
 
     // Answer short term medical questions
     await waitForPageToLoad(pageSession, 'Short Term Questions', {

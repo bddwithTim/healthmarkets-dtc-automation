@@ -9,6 +9,7 @@
     "test:supp": "cross-env test_env=supp npx playwright test",
     "test:prod": "cross-env test_env=prod npx playwright test -g \"@prod\"",
     "lint": "eslint . --ext .ts",
+    "lint-staged": "lint-staged",
     "pre-commit": "lint-staged",
     "prettier": "prettier --write . --single-quote",
     "prepare": "husky install"

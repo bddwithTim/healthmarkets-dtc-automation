@@ -19,7 +19,6 @@ import CensusPage from '@pages/choice-dtc/CensusPage';
 import DemographicsPage from '@pages/choice-dtc/DemographicsPage';
 import QuotesPage from '@pages/choice-dtc/QuotesPage';
 import CartPage from '@pages/choice-dtc/CartPage';
-import MoreInfoNeededPage from '@pages/choice-dtc/MoreInfoNeededPage';
 import UHOApplicantInfoPage from '@pages/uhc-enrollment/ApplicantInformationPage';
 
 test.describe('Dental - Basic flow @smoke @e2e @dental', () => {
@@ -31,7 +30,6 @@ test.describe('Dental - Basic flow @smoke @e2e @dental', () => {
     const demographicsPage = new DemographicsPage(page);
     const quotesPage = new QuotesPage(page);
     const cartPage = new CartPage(page);
-    const moreInfoNeededPage = new MoreInfoNeededPage(page);
 
     // Test data
     const zipCode = '75221';

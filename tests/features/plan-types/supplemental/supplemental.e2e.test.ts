@@ -9,9 +9,8 @@ test.describe.skip(
     test('Quoting a single Supplemental plan, add it to cart and finish the enrollment process', async ({
       page,
     }) => {
-      // Page object instances
+      // TODO: Add Supplemental flow
 
-      // Navigate to Census page and accept cookies
       await navigateToCensusPage(page);
       await clickConsentToCookiesButton(page);
     });

@@ -5,8 +5,8 @@ export default class UHOReviewAndSubmitPagePage {
 
   private reviewAndSubmitPageElements = {
     // electronic signature elements
-    firstAcknowledgementCheckbox: 'label[for="hasAcknowledgedFact_0"]',
-    secondAcknowledgementCheckbox: 'label[for="hasAcknowledged_"]',
+    membershipAcknowledgementCheckbox: 'label[for="hasAcknowledgedFact_0"]',
+    termsAndConditionsAcknowledgementCheckbox: 'label[for="hasAcknowledged_"]',
     clickHereToSign: 'text=Click Here to Sign',
 
     // buttons
@@ -17,37 +17,40 @@ export default class UHOReviewAndSubmitPagePage {
     this.page = page;
   }
 
-  async clickFirstAcknowledgementCheckbox(): Promise<void> {
+  async clickMembershipAcknowledgementCheckbox(): Promise<void> {
     /*
     I hereby enroll in the Federation of American Consumers and Travelers (FACT) at the 
     Basic Membership level ($10 a month). This membership gives access to apply 
     for this insurance product.
     */
     await this.page.click(
-      this.reviewAndSubmitPageElements.firstAcknowledgementCheckbox
+      this.reviewAndSubmitPageElements.membershipAcknowledgementCheckbox
     );
   }
 
-  async clickSecondAcknowledgementCheckbox(): Promise<void> {
+  async clickTermsAndConditionsAcknowledgementCheckbox(): Promise<void> {
     /*
     I (we) have reviewed, understand, and agree that by applying for coverage and 
     by providing my (our) electronic signature below, I (we) am (are) agreeing to: ...
     */
     await this.page.click(
-      this.reviewAndSubmitPageElements.secondAcknowledgementCheckbox
+      this.reviewAndSubmitPageElements.termsAndConditionsAcknowledgementCheckbox
     );
   }
 
   async clickHereToSign(): Promise<void> {
     // additional pre-caution to prevent successful enrollment in production environment
     if (process.env.test_env === 'prod') {
-      console.log('Not allowed in production environment!');
-      return;
+      throw new Error('Not allowed in production environment!');
     }
     await this.page.click(this.reviewAndSubmitPageElements.clickHereToSign);
   }
 
   async clickSubmitYourApplication(): Promise<void> {
+    // additional pre-caution to prevent successful enrollment in production environment
+    if (process.env.test_env === 'prod') {
+      throw new Error('Not allowed in production environment!');
+    }
     await this.page.click(
       this.reviewAndSubmitPageElements.btnSubmitYourApplication
     );

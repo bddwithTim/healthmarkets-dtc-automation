@@ -43,14 +43,6 @@ export default class QuotesPage {
     await this.page.click(this.quotesPageElements.btnContinueOnline);
   }
 
-  async clickProceedToApplicationBtn(): Promise<void> {
-    await this.page
-      .getByRole('button', {
-        name: `${this.quotesPageElements.btnProceedToApplication}`,
-      })
-      .click();
-  }
-
   async isAppBarTabDisplayed(tabName: string): Promise<boolean> {
     const activeTabTitle = await this.page.$eval(
       '.app-bar-tab.active .app-bar-tab-title',

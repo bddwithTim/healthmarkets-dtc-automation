@@ -43,5 +43,10 @@ export async function waitForUHOSpinnerToDisappear(page: Page): Promise<void> {
 }
 
 export async function clickUHOContinueBtn(page: Page): Promise<void> {
-  await page.click('//span[text()="Continue >"]');
+  await page.locator('span[data-code="MultiCarrier.Buttons.Continue"]').click();
+}
+
+export async function waitForNewTab(page: Page): Promise<Page> {
+  const newTab = await page.waitForEvent('popup');
+  return newTab;
 }

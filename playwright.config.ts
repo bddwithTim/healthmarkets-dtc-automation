@@ -13,7 +13,7 @@ const config: PlaywrightTestConfig = {
   workers: process.env.CI ? 1 : '50%',
   reporter: [['html', { open: 'on-failure' }]],
   use: {
-    actionTimeout: 0,
+    actionTimeout: 20000,
     trace: 'on-first-retry',
     viewport: { width: 1920, height: 1080 },
   },

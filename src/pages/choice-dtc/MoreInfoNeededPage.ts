@@ -1,4 +1,6 @@
 import { Page } from '@playwright/test';
+import { waitForNewTab } from '@utils/pageHelpers';
+import { ApplicationType } from '@enums/enums';
 
 export default class MoreInfoNeededPage {
   private readonly page: Page;
@@ -33,21 +35,22 @@ export default class MoreInfoNeededPage {
     await this.page.fill(this.MoreInfoNeededPageElements.lastName, lastName);
   }
 
-  async clickContinueBtn(): Promise<void | Page> {
-    // There is an issue (low priority) in supp environment wherein
-    // it will open a new tab for UHO Applicant information page
+  async clickContinueBtn(
+    appType: ApplicationType | null = null
+  ): Promise<Page | void> {
+    // There is a low priority issue  in supp environment wherein
+    // if the user has quoted for an STM plan, the UHO Applicant
+    // information page is opened in a new tab
     // instead of just staying on the same page session
-    if (process.env.test_env === 'supp') {
-      const [newTab] = await Promise.all([
-        this.page.waitForEvent('popup'),
-        this.page.click(this.MoreInfoNeededPageElements.btnContinue),
-      ]);
+    if (appType === ApplicationType.STM && process.env.test_env === 'supp') {
+      await this.page.click(this.MoreInfoNeededPageElements.btnContinue);
+      const newTab = await waitForNewTab(this.page);
       return newTab;
     }
 
     // playwright has an auto-wait feature for click events
     // but for some reason, it doesn't work on this particular button
-    // so we have to add a manual wait
+    // so we have to add workaround by adding a timeout
     await this.page.waitForTimeout(1000);
     await this.page.click(this.MoreInfoNeededPageElements.btnContinue);
   }

@@ -102,7 +102,8 @@ test.describe('STM - Basic flow @smoke @e2e @stm', () => {
     });
     await uhoApplicantInfoPage.fillResidentPhysicalAddress('general delivery');
     await uhoApplicantInfoPage.fillResidentCity('Dallas');
-    await clickUHOContinueBtn(page);
+    await clickUHOContinueBtn(pageSession);
+    // await pageSession.getByRole('button', { name: 'Continue >' }).click();
 
     // Answer short term medical questions
     await waitForPageToLoad(pageSession, 'Short Term Questions', {

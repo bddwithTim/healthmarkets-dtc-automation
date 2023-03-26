@@ -37,12 +37,7 @@ export default class MoreInfoNeededPage {
 
   async clickContinueBtn(
     appType: ApplicationType | null = null
-  ): Promise<Page | null> {
-    // playwright has an auto-wait feature for click events
-    // but for some reason, it doesn't work on this particular button
-    // so we have to add a manual wait
-    await this.page.waitForTimeout(1000);
-
+  ): Promise<Page | void> {
     // There is a low priority issue  in supp environment wherein
     // if the user has quoted for an STM plan, the UHO Applicant
     // information page is opened in a new tab
@@ -53,7 +48,10 @@ export default class MoreInfoNeededPage {
       return newTab;
     }
 
+    // playwright has an auto-wait feature for click events
+    // but for some reason, it doesn't work on this particular button
+    // so we have to add workaround by adding a timeout
+    await this.page.waitForTimeout(1000);
     await this.page.click(this.MoreInfoNeededPageElements.btnContinue);
-    return null;
   }
 }

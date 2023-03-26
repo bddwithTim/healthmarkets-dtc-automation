@@ -11,13 +11,19 @@ import { navigateToCensusPage } from '@pages/choice-dtc/CensusPage';
 import CensusPage from '@pages/choice-dtc/CensusPage';
 import DemographicsPage from '@pages/choice-dtc/DemographicsPage';
 import QuotesPage from '@pages/choice-dtc/QuotesPage';
+import CartPage from '@pages/choice-dtc/CartPage';
 import MoreInfoNeededPage from '@pages/choice-dtc/MoreInfoNeededPage';
 import UHOApplicantInfoPage from '@pages/uhc-enrollment/ApplicantInformationPage';
-import UHOShortTermMedicalQuestionsPage from '@pages/uhc-enrollment/questions/ShortTermMedicalQuestions';
+import UHOShortTermMedicalQuestionsPage from '@pages/uhc-enrollment/questions/ShortTermMedicalQuestionsPage';
 import UHOPaymentAndBillingPage from '@pages/uhc-enrollment/PaymentAndBillingPage';
 import UHOReviewAndSubmitPage from '@pages/uhc-enrollment/ReviewAndSubmitPage';
 
-import { ApplicantType, LoadState, YesNoAnswer } from '@enums/enums';
+import {
+  ApplicantType,
+  LoadState,
+  YesNoAnswer,
+  ApplicationType,
+} from '@enums/enums';
 import applicantInfo from '@data/applicant-information.json';
 import payment from '@data/payment.json';
 
@@ -30,6 +36,7 @@ test.describe('STM - Basic flow @smoke @e2e @stm', () => {
     const censusPage = new CensusPage(page);
     const demographicsPage = new DemographicsPage(page);
     const quotesPage = new QuotesPage(page);
+    const cartPage = new CartPage(page);
     const moreInfoNeededPage = new MoreInfoNeededPage(page);
 
     // Test data
@@ -67,7 +74,7 @@ test.describe('STM - Basic flow @smoke @e2e @stm', () => {
 
     // Cart page - proceed to application
     await waitForPageToLoad(page, 'Shopping Cart');
-    await quotesPage.clickProceedToApplicationBtn();
+    await cartPage.clickProceedToEnrollmentBtn();
 
     // Fill more information needed page
     await waitForPageToLoad(page, 'More Information Needed');
@@ -80,7 +87,8 @@ test.describe('STM - Basic flow @smoke @e2e @stm', () => {
     await moreInfoNeededPage.fillLastNameField(applicantInfo.primary.lastName);
 
     // handling new tab if test environment is supp
-    const pageSession = (await moreInfoNeededPage.clickContinueBtn()) ?? page;
+    const pageSession =
+      (await moreInfoNeededPage.clickContinueBtn(ApplicationType.STM)) ?? page;
 
     // Fill UHO applicant information page
     const uhoApplicantInfoPage = new UHOApplicantInfoPage(pageSession);
@@ -94,7 +102,7 @@ test.describe('STM - Basic flow @smoke @e2e @stm', () => {
     });
     await uhoApplicantInfoPage.fillResidentPhysicalAddress('general delivery');
     await uhoApplicantInfoPage.fillResidentCity('Dallas');
-    await uhoApplicantInfoPage.clickContinueBtn();
+    await clickUHOContinueBtn(page);
 
     // Answer short term medical questions
     await waitForPageToLoad(pageSession, 'Short Term Questions', {
@@ -136,8 +144,8 @@ test.describe('STM - Basic flow @smoke @e2e @stm', () => {
     const uhoReviewAndSubmitPage = new UHOReviewAndSubmitPage(pageSession);
     await waitForPageToLoad(pageSession, 'Review & Submit');
 
-    await uhoReviewAndSubmitPage.clickFirstAcknowledgementCheckbox();
-    await uhoReviewAndSubmitPage.clickSecondAcknowledgementCheckbox();
+    await uhoReviewAndSubmitPage.clickMembershipAcknowledgementCheckbox();
+    await uhoReviewAndSubmitPage.clickTermsAndConditionsAcknowledgementCheckbox();
     await uhoReviewAndSubmitPage.clickHereToSign();
     await uhoReviewAndSubmitPage.clickSubmitYourApplication();
 

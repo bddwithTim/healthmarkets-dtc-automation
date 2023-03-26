@@ -24,9 +24,6 @@ export default class UHOApplicantInfoPage {
   private readonly page: Page;
 
   private applicantInformationPageElements = {
-    // buttons
-    btnContinue: '//span[text()="Continue >"]',
-
     // radio buttons
     rdoBtnMale: '//label[@for="primary_gender_0"]',
     rdoBtnFemale: '//label[@for="primary_gender_1"]',
@@ -48,10 +45,6 @@ export default class UHOApplicantInfoPage {
 
   constructor(page: Page) {
     this.page = page;
-  }
-
-  async clickContinueBtn(): Promise<void> {
-    await this.page.click(this.applicantInformationPageElements.btnContinue);
   }
 
   async fillPrimaryHeightInFeet(heightFeet: number | string): Promise<void> {

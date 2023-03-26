@@ -34,17 +34,18 @@ git clone https://<your-token>@github.optum.com/HMA/healthmarkets-dtc-automation
 
 Replace `<your-token>` with the Personal Access Token you generated in Step 2.
 
-### Update the stored credentials in the Windows Credential Manager 
+### Update the stored credentials in the Windows Credential Manager
+
 (*Ignore this section if this hasn't been setup*)
 
 1. Open the Control Panel.
 2. Click on "User Accounts."
 3. Click on "Credential Manager."
 4. Under "Windows Credentials," look for any credentials related to your GitHub Enterprise instance (e.g., `git:https://github.optum.com` or `git:https://username@github.optum.com`).
-5. For each credential found, perform the following steps:
-    a. Click on the credential, and then click "Edit."
-    b. In the "Edit" window, replace the existing password with your personal access token.
-    c. Click "Save."
+5. For each credential found, perform the following steps:  
+   a. Click on the credential, and then click "Edit."  
+   b. In the "Edit" window, replace the existing password with your personal access token.  
+   c. Click "Save."
 
 ## Step 4: Verify Repository Access
 

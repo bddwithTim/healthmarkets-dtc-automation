@@ -19,3 +19,12 @@ export enum LoadState {
   DOMContentLoaded = 'domcontentloaded',
   NetworkIdle = 'networkidle',
 }
+
+export enum ApplicationType {
+  STM = 'STM',
+  Dental = 'Dental',
+  Vision = 'Vision',
+  ACA = 'ACA',
+  Medicare = 'Medicare',
+  Supplemental = 'Supplemental',
+}

@@ -7,9 +7,8 @@ test.describe.skip('Medicare - Basic flow @smoke @e2e @medicare', () => {
   test('Quoting a single Medicare plan, add it to cart and finish the enrollment process', async ({
     page,
   }) => {
-    // Page object instances
+    // TODO: Add Medicare flow
 
-    // Navigate to Census page and accept cookies
     await navigateToCensusPage(page);
     await clickConsentToCookiesButton(page);
   });

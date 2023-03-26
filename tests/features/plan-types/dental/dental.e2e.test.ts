@@ -1,9 +1,16 @@
 import { test } from '@playwright/test';
+import UHODentalQuestionsPage from '@pages/uhc-enrollment/questions/DentalQuestionsPage';
+import UHOPaymentAndBillingPage from '@pages/uhc-enrollment/PaymentAndBillingPage';
+import UHOReviewAndSubmitPage from '@pages/uhc-enrollment/ReviewAndSubmitPage';
 
+import { ApplicantType, LoadState, YesNoAnswer } from '@enums/enums';
+import applicantInfo from '@data/applicant-information.json';
+import payment from '@data/payment.json';
 import {
   clickConsentToCookiesButton,
   clickUHOContinueBtn,
   waitForPageToLoad,
+  waitForNewTab,
 } from '@utils/pageHelpers';
 import { getDateOfBirthFromAge, parseGender } from '@utils/utils';
 import { navigateToCensusPage } from '@pages/choice-dtc/CensusPage';
@@ -11,17 +18,11 @@ import { navigateToCensusPage } from '@pages/choice-dtc/CensusPage';
 import CensusPage from '@pages/choice-dtc/CensusPage';
 import DemographicsPage from '@pages/choice-dtc/DemographicsPage';
 import QuotesPage from '@pages/choice-dtc/QuotesPage';
+import CartPage from '@pages/choice-dtc/CartPage';
 import MoreInfoNeededPage from '@pages/choice-dtc/MoreInfoNeededPage';
 import UHOApplicantInfoPage from '@pages/uhc-enrollment/ApplicantInformationPage';
-import UHOShortTermMedicalQuestionsPage from '@pages/uhc-enrollment/questions/ShortTermMedicalQuestions';
-import UHOPaymentAndBillingPage from '@pages/uhc-enrollment/PaymentAndBillingPage';
-import UHOReviewAndSubmitPage from '@pages/uhc-enrollment/ReviewAndSubmitPage';
 
-import { ApplicantType, LoadState, YesNoAnswer } from '@enums/enums';
-import applicantInfo from '@data/applicant-information.json';
-import payment from '@data/payment.json';
-
-test.describe.only('Dental - Basic flow @smoke @e2e @dental', () => {
+test.describe('Dental - Basic flow @smoke @e2e @dental', () => {
   test('Quoting a single Dental plan, add it to cart and finish the enrollment process', async ({
     page,
   }) => {
@@ -29,6 +30,7 @@ test.describe.only('Dental - Basic flow @smoke @e2e @dental', () => {
     const censusPage = new CensusPage(page);
     const demographicsPage = new DemographicsPage(page);
     const quotesPage = new QuotesPage(page);
+    const cartPage = new CartPage(page);
     const moreInfoNeededPage = new MoreInfoNeededPage(page);
 
     // Test data
@@ -57,14 +59,66 @@ test.describe.only('Dental - Basic flow @smoke @e2e @dental', () => {
 
     await demographicsPage.clickSeeQuotesBtn();
 
-    // Quotes page
+    // Quotes page - filter and add a UHO Dental plan to cart
     await waitForPageToLoad(page, 'Dental Quotes', {
       loadState: LoadState.Load,
       timeout: 60000,
     });
     await quotesPage.waitForGoodNewsModalToBeDisplayed();
     await quotesPage.clickNoShowMeQuotesBtn();
+    await quotesPage.filterByCompany('Golden Rule Insurance Co.');
+    await quotesPage.clickFirstAddToCartButton();
+    await quotesPage.clickGoToMyCartBtn();
 
-    await page.pause();
+    // Cart page - proceed to application
+    await waitForPageToLoad(page, 'Shopping Cart');
+    await cartPage.clickProceedToEnrollmentBtn();
+
+    // Handling new tab as UHO applicant information page is opened in a new tab
+    const pageSession = await waitForNewTab(page);
+
+    // Fill UHO applicant information page
+    const uhoApplicantInfoPage = new UHOApplicantInfoPage(pageSession);
+    await waitForPageToLoad(pageSession, 'Applicant Information', {
+      timeout: 60000,
+    });
+
+    // No need to fill out the applicant information page as it is pre-filled
+    // from Choice DTC demographics page. Only the Resident Physical Address.
+    await uhoApplicantInfoPage.fillResidentPhysicalAddress('general delivery');
+    await uhoApplicantInfoPage.fillResidentCity('Dallas');
+    await clickUHOContinueBtn(pageSession);
+
+    // Answer dental questions
+    const uhoDentalQuestionsPage = new UHODentalQuestionsPage(pageSession);
+    await uhoDentalQuestionsPage.answerOtherCovReplaceQuestion(YesNoAnswer.No);
+    await clickUHOContinueBtn(pageSession);
+
+    // Payment & Billing - Summary wizard
+    const uhoPaymentAndBillingPage = new UHOPaymentAndBillingPage(pageSession);
+    await waitForPageToLoad(pageSession, 'Payment & Billing');
+    await uhoPaymentAndBillingPage.waitForSummaryWizard();
+    await clickUHOContinueBtn(pageSession);
+
+    // Payment & Billing - Payment wizard
+    await uhoPaymentAndBillingPage.waitForPaymentWizard();
+    await uhoPaymentAndBillingPage.fillRoutingNumber(
+      payment.electronicFundsTransfer.routingNumber
+    );
+    await uhoPaymentAndBillingPage.fillAccountNumber(
+      payment.electronicFundsTransfer.accountNumber
+    );
+    await clickUHOContinueBtn(pageSession);
+
+    // Review & Submit page
+    const uhoReviewAndSubmitPage = new UHOReviewAndSubmitPage(pageSession);
+    await waitForPageToLoad(pageSession, 'Review & Submit');
+
+    await uhoReviewAndSubmitPage.clickTermsAndConditionsAcknowledgementCheckbox();
+    await uhoReviewAndSubmitPage.clickHereToSign();
+    await uhoReviewAndSubmitPage.clickSubmitYourApplication();
+
+    // Verify the Thank you page
+    await waitForPageToLoad(pageSession, 'Thank You', { timeout: 60000 });
   });
 });

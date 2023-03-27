@@ -39,7 +39,7 @@ To execute the tests, use the npm test command along with the appropriate enviro
 
 ### To run all tests
 
-```sh
+```console
 npm test
 ```
 
@@ -47,25 +47,25 @@ npm test
 
 ### To run tests in a specific environment (e.g., model, supp, or prod)
 
-```sh
+```console
 npm run test:model
 ```
 
 ### Run in headed mode
 
-```sh
+```console
 npm test -- --headed
 ```
 
 ### Run specific tests using @tags (e.g., @smoke, @regression, etc.)
 
-```sh
+```console
 npm test -- -g @smoke
 ```
 
 - This command will execute and target tests that has `@smoke` tags.
 
-```sh
+```console
 npm test -- -g @smoke -g @forms
 ```
 

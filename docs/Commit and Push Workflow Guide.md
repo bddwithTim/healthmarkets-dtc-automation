@@ -21,7 +21,7 @@ Follow these steps to commit and push your changes to the Git repository:
 
 1. **Create a new branch:** Always create a new branch for your work to keep the main branch clean and stable. Base your new branch on the latest version of the main branch.
 
-    ```sh
+    ```console
     git checkout main
     git pull
     git checkout -b /feature/US39XXXX74_short_description_here
@@ -29,7 +29,7 @@ Follow these steps to commit and push your changes to the Git repository:
 
     In case your automation task doesn’t have a designated user story, make sure you name the branch concisely.
 
-    ```sh
+    ```console
     git checkout -b /feature/featureName_short_description_here
     ```
 
@@ -37,40 +37,40 @@ Follow these steps to commit and push your changes to the Git repository:
 
 3. **Check your changes:** Confirm that you have modified the intended files and that there are no unintended changes.
 
-    ```sh
+    ```console
     git status
     git diff
     ```
 
 4. **Stage your changes:** Add the modified files to the staging area, preparing them for the next commit. You can stage all changes or specific files and folders.
 
-    ```sh
+    ```console
     git add .
     ```
 
     If you only want to stage specific folders or files
 
-    ```sh
+    ```console
     git add tests/sampleTestFile.test.ts
     ```
 
 5. **Review staged changes:** Double-check that you've staged the correct files.
 
-    ```sh
+    ```console
     git status
     git diff --staged
     ```
 
     If you stage something you didn’t mean to, you can un-stage it.
 
-    ```sh
+    ```console
     git reset tests/sampleTestFile.test.ts
     ```
 
 6. **Commit your changes:** Create a new commit with a descriptive message. Include
     a relevant ticket or issue ID in the commit message if applicable.
 
-    ```sh
+    ```console
     git commit -m “US39XXXX74: Descriptive commit message”
     ```
 
@@ -78,7 +78,7 @@ Follow these steps to commit and push your changes to the Git repository:
 
 8. **Push your changes:** Push your branch and commits to the remote repository.
 
-    ```sh
+    ```console
     git push origin HEAD
     ```
 

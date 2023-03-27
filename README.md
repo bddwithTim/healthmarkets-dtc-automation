@@ -1,18 +1,13 @@
 # Choice-DTC Automation
 
-This repository contains the functional test suite for our web application using [Playwright](https://playwright.dev/), a popular browser automation library.
+This repository houses the functional test suite for the Choice-DTC (eMarket) web application, leveraging the [Playwright](https://playwright.dev/) browser automation library. The project, also referred to as eMarket Automation, is built using TypeScript and aims to ensure the proper functionality and validation of the application's features.
 
 ## Table of Contents
 
-1. [Overview](#overview)
-2. [Getting Started](#getting-started)
-3. [Workflow Guides](#workflow-guides)
-4. [Running Tests](#running-tests)
-5. [Automation Constraints](#automation-constraints)
-
-## Overview
-
-Choice-DTC Automation, also known as eMarket Automation, is a functional testing project for the Choice-DTC (eMarket) web application. The project utilizes Playwright, a popular browser automation library, and is written in TypeScript. The primary focus of the test suite is to verify and validate the functional aspects of the application.
+1. [Getting Started](#getting-started)
+2. [Workflow Guides](#workflow-guides)
+3. [Running Tests](#running-tests)
+4. [Automation Limitations](#automation-limitations)
 
 ## Getting Started
 
@@ -22,9 +17,9 @@ Before proceeding with the setup, ensure that the following software is installe
 
 - [Node.js](https://optum.service-now.com/euts_intake?id=appstore&q=Node.js) (version 16.14.2)
 - [Visual Studio Code](https://optum.service-now.com/euts_intake?id=appstore&q=visual%20studio%20code) (version 1.68.1)
-- [Git](https://optum.service-now.com/euts_intake?id=appstore&q=git). Once installed, see [Getting Started with Git: Secure Remote Repository Access Guide](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Secure%20Remote%20Repository%20Access%20Guide.md).
+- [Git](https://optum.service-now.com/euts_intake?id=appstore&q=git). After installation, refer to [Getting Started with Git: Secure Remote Repository Access Guide](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Secure%20Remote%20Repository%20Access%20Guide.md).
 
-### Virtual environment setup
+### Setting up the Virtual Environment
 
 To install the project dependencies, follow these steps:
 
@@ -35,7 +30,7 @@ To install the project dependencies, follow these steps:
 ## Workflow Guides
 
 - [Getting Started with Git: Secure Remote Repository Access Guide](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Secure%20Remote%20Repository%20Access%20Guide.md)
-- [Playwright Test Script Authoring](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Playwright%20Test%20Script%20Authoring.md)
+- [Choice-DTC Test Script Authoring](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Playwright%20Test%20Script%20Authoring.md)
 - [Commit and Push Workflow Guide](https://github.com/bddwithTim/healthmarkets-dtc-automation/blob/master/docs/Commit%20and%20Push%20Workflow%20Guide.md)
 
 ## Running Tests
@@ -78,10 +73,11 @@ npm test -- -g @smoke -g @forms
 
 For more CLI tests, refer to [Playwright CLI tests](https://playwright.dev/docs/test-cli)
 
-## Automation Constraints
+## Automation Limitations
 
-This automation repository currently only supports functional testing for web applications on desktop browsers. Please note that mobile automation is not supported at this time.
+The current automation repository primarily supports functional testing for web applications on desktop browsers. However, it is important to note that mobile automation is not supported at this time.
 
-Due to Optum restrictions, testing on Chromium and WebKit browsers is not supported. The test suite is limited to running on the supported browsers as per the organization's policy.
+Due to organizational restrictions at Optum, testing on Chromium and WebKit(Safari) browsers is not supported. As a result, the test suite is limited to running on browsers that comply with the organization's policies.
 
-Please be aware of these constraints when working with the Choice-DTC Automation project.
+Please keep these limitations in mind when working with the Choice-DTC Web Automation project.
+

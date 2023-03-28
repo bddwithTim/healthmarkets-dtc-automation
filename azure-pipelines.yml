@@ -1,7 +1,20 @@
 trigger:
   branches:
     include:
-    - main  # replace with your default branch name
+    - master
+
+pr:
+  branches:
+    include:
+    - '*'
+
+schedules:
+- cron: '0 2 * * 1,3,5'
+  displayName: 'Scheduled run at 10 AM GMT+8 every Monday, Wednesday, and Friday'
+  branches:
+    include:
+    - master
+  always: true
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -22,12 +35,9 @@ steps:
   displayName: 'Install Playwright dependencies'
 
 - script: |
-    npm run test:model
-  displayName: 'Run Playwright tests (Model)'
-
-- script: |
-    npm run test:supp
-  displayName: 'Run Playwright tests (Supp)'
+    chmod +x run-changed-tests.sh
+    ./run-changed-tests.sh
+  displayName: 'Run tests based on scenario'
 
 - task: PublishTestResults@2
   inputs:

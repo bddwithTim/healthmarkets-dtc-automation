@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Fetch the origin/master branch reference
+git fetch origin
+
+# Set the test files' path
+TEST_FILES_PATH='tests'
+
 # Check if this is a pull request
 if [ "$BUILD_REASON" == "PullRequest" ]; then
   # Get the target branch
@@ -9,7 +15,7 @@ if [ "$BUILD_REASON" == "PullRequest" ]; then
   CHANGED_FILES=$(git diff --name-only --diff-filter=d $TARGET_BRANCH)
 
   # Filter out the test files
-  CHANGED_TESTS=$(echo "$CHANGED_FILES" | grep -E '^path/to/tests/.*\.test\.ts$')
+  CHANGED_TESTS=$(echo "$CHANGED_FILES" | grep -E "^${TEST_FILES_PATH}/.*\.test\.ts$")
 
   if [ -z "$CHANGED_TESTS" ]; then
     echo "No test files changed. Skipping tests."

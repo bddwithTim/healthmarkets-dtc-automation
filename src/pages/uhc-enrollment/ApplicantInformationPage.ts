@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+import { Gender } from '@enums/enums';
 
 export type Height = {
   feet: number;
@@ -15,7 +16,7 @@ export type PrimaryApplicantInfo = {
   height?: Height;
   weight?: Weight;
   emailAddress?: string;
-  gender?: string;
+  gender?: Gender;
   phoneNumber?: string;
   ssn?: number;
 };
@@ -141,11 +142,11 @@ export default class UHOApplicantInfoPage {
     phoneNumber && (await this.fillPrimaryPhone(phoneNumber));
     ssn && (await this.fillPrimarySSN(ssn));
 
-    gender?.toLowerCase() === 'male'
-      ? await this.page.click(this.applicantInformationPageElements.rdoBtnMale)
-      : gender?.toLowerCase() === 'female' &&
-        (await this.page.click(
-          this.applicantInformationPageElements.rdoBtnFemale
-        ));
+    gender &&
+      (await this.page.click(
+        gender.toLowerCase() === 'male'
+          ? this.applicantInformationPageElements.rdoBtnMale
+          : this.applicantInformationPageElements.rdoBtnFemale
+      ));
   }
 }

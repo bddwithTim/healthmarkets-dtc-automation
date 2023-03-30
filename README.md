@@ -1,4 +1,4 @@
-[![ci](https://dev.azure.com/automationwithTim/healthmarkets-dtc-automation/_apis/build/status/bddwithTim.healthmarkets-dtc-automation?branchName=master)](https://dev.azure.com/automationwithTim/healthmarkets-dtc-automation/_build/latest?definitionId=1&branchName=master) [![build](https://dev.azure.com/automationwithTim/healthmarkets-dtc-automation/_apis/build/status/bddwithTim.healthmarkets-dtc-automation?branchName=master&isPr=true)](https://dev.azure.com/automationwithTim/healthmarkets-dtc-automation/_build?definitionId=1)
+[![Master Branch Build Status](https://dev.azure.com/automationwithTim/healthmarkets-dtc-automation/_apis/build/status/bddwithTim.healthmarkets-dtc-automation?branchName=master)](https://dev.azure.com/automationwithTim/healthmarkets-dtc-automation/_build/latest?definitionId=1&branchName=master)
 
 # Choice-DTC Automation
 

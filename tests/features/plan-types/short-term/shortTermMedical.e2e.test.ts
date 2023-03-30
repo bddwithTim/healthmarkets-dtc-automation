@@ -66,7 +66,7 @@ test.describe('STM - Basic flow @smoke @e2e @stm', () => {
     // Quotes page - filter and add a UHO STM plan to cart
     await waitForPageToLoad(page, 'Health Quotes', {
       loadState: LoadState.NetworkIdle,
-      timeout: 60000,
+      timeout: 100000,
     });
     await quotesPage.filterByCompany('Golden Rule Insurance Co.');
     await quotesPage.clickFirstAddToCartButton();

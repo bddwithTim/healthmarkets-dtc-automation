@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Fetch the origin/master branch reference
+git fetch origin
+
 # Check if this is a pull request
 if [ "$BUILD_REASON" == "PullRequest" ]; then
   # Get the target branch

@@ -1,3 +1,5 @@
+[![ci](https://dev.azure.com/automationwithTim/healthmarkets-dtc-automation/_apis/build/status/bddwithTim.healthmarkets-dtc-automation?branchName=master)](https://dev.azure.com/automationwithTim/healthmarkets-dtc-automation/_build/latest?definitionId=1&branchName=master) [![build](https://dev.azure.com/automationwithTim/healthmarkets-dtc-automation/_apis/build/status/bddwithTim.healthmarkets-dtc-automation?branchName=master&isPr=true)](https://dev.azure.com/automationwithTim/healthmarkets-dtc-automation/_build?definitionId=1)
+
 # Choice-DTC Automation
 
 This repository houses the functional test suite for the Choice-DTC (eMarket) web application, leveraging the [Playwright](https://playwright.dev/) browser automation library. The project, also referred to as eMarket Automation, is built using TypeScript and aims to ensure the proper functionality and validation of the application's features.
